@@ -1,20 +1,44 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Link from "next/link";
 
-import { AiFillCrown, AiOutlineHome } from "react-icons/ai";
+import { AiFillCrown, AiOutlineHome, AiOutlineClose } from "react-icons/ai";
 import { BsFillBasket2Fill, BsGear } from "react-icons/bs";
 import { BiCategoryAlt } from "react-icons/bi";
 import { CiLogout } from "react-icons/ci";
 import { FaRegComments } from "react-icons/fa6";
 import { MdEditNote, MdOutlineKeyboardArrowRight } from "react-icons/md";
+import { FiMenu } from "react-icons/fi";
 
 const Sidebar = () => {
+    const [isOpen, setIsOpen] = useState(true);
+    const toggleSidebar = () => {
+        if (isOpen) {
+            setIsOpen(false);
+        } else {
+            setIsOpen(true);
+        }
+    };
     return (
-        <div className="flex flex-col justify-between bg-white border-r border-gray-100 duration-300 text-gray-500 h-100">
+        <div
+            className={`flex flex-col justify-between bg-white border-r border-gray-100 duration-300 text-gray-500 h-100 ${
+                isOpen ? "w-56" : "w-14"
+            }`}
+        >
             <div className="flex flex-col">
-                <div className="flex justify-center items-center cursor-pointer border-b border-gray-100 h-12">
+                <div className="relative flex justify-center items-center cursor-pointer border-b border-gray-100 h-12">
                     <AiFillCrown size={25} className="text-cyan-600" />
-                    <h3 className="pt-0.5 pl-1.5">Admin</h3>
+                    {isOpen && <h3 className="pt-0.5 pl-1.5">Admin</h3>}
+                    <div
+                        className="absolute right-[-13px] p-1 cursor-pointer duration-300 ease-in-out rounded-full bg-white border border-gray-100 hover:bg-slate-100"
+                        onClick={toggleSidebar}
+                    >
+                        {isOpen ? (
+                            <AiOutlineClose size={15} />
+                        ) : (
+                            <FiMenu size={15} />
+                        )}
+                    </div>
                 </div>
                 <nav>
                     <ul>
@@ -24,15 +48,17 @@ const Sidebar = () => {
                                 className="flex items-center justify-center p-2.5 transition-all ease-in-out duration-300 text-xs font-semibold hover:bg-cyan-50 hover:text-cyan-600"
                             >
                                 <AiOutlineHome size={18} />
-                                <span className="flex-1 mt-0 mb-0 mr-2.5 ml-2.5">
-                                    Dashboard
-                                </span>
+                                {isOpen && (
+                                    <span className="flex-1 mt-0 mb-0 mr-2.5 ml-2.5">
+                                        Dashboard
+                                    </span>
+                                )}
                             </Link>
-                            <ul className="group-hover:visible group-hover:translate-y-0 invisible absolute top-0 left-full opacity-0 transition-all ease-in-out duration-100 bg-white shadow translate-y-3 z-10">
+                            <ul className="group-hover:visible group-hover:translate-y-0 invisible absolute top-0 left-full transition-all ease-in-out duration-100 bg-white shadow translate-y-2 z-10">
                                 <li>
                                     <Link
                                         href="#"
-                                        className="pt-2.5 pb-2.5 pr-10 pl-40 transition-all ease-in-out duration-300 text-xs"
+                                        className="py-6 px-8 transition-all ease-in-out duration-100 text-xs"
                                     >
                                         <strong>Dashboard</strong>
                                     </Link>
@@ -45,110 +71,150 @@ const Sidebar = () => {
                                 className="flex items-center justify-center p-2.5 transition-all ease-in-out duration-300 text-xs font-semibold hover:bg-cyan-50 hover:text-cyan-600"
                             >
                                 <BsFillBasket2Fill size={18} />
-                                <span className="flex-1 mt-0 mb-0 mr-2.5 ml-2.5">
-                                    Products
-                                </span>
-                                <MdOutlineKeyboardArrowRight className="submenu-icon" />
+                                {isOpen && (
+                                    <>
+                                        <span className="flex-1 mt-0 mb-0 mr-2.5 ml-2.5">
+                                            Products
+                                        </span>
+                                        <MdOutlineKeyboardArrowRight />
+                                    </>
+                                )}
                             </Link>
-                            {/* <ul className="dropdown-menu">
+                            <ul className="group-hover:visible group-hover:translate-y-0 invisible absolute top-0 left-full transition-all ease-in-out duration-100 bg-white shadow translate-y-2 z-10">
                                 <li>
-                                    <Link href="#">
+                                    <Link
+                                        href="#"
+                                        className="text-xs py-6 px-8"
+                                    >
                                         <strong>Products</strong>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="#">
-                                        <MdOutlineKeyboardArrowRight className="submenu-icon" />
+                                    <Link
+                                        href="#"
+                                        className="flex items-center text-xs py-2 px-2"
+                                    >
+                                        <MdOutlineKeyboardArrowRight />
                                         <span className="flex-1 mt-0 mb-0 mr-2.5 ml-2.5">
                                             List
                                         </span>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="#">
-                                        <MdOutlineKeyboardArrowRight className="submenu-icon" />
+                                    <Link
+                                        href="#"
+                                        className="flex items-center text-xs py-2 px-2"
+                                    >
+                                        <MdOutlineKeyboardArrowRight />
                                         <span className="flex-1 mt-0 mb-0 mr-2.5 ml-2.5">
                                             Add
                                         </span>
                                     </Link>
                                 </li>
-                            </ul> */}
+                            </ul>
                         </li>
-                        <li className="item">
+                        <li className="relative group">
                             <Link
                                 href="#"
                                 className="flex items-center justify-center p-2.5 transition-all ease-in-out duration-300 text-xs font-semibold hover:bg-cyan-50 hover:text-cyan-600"
                             >
                                 <BiCategoryAlt size={18} />
-                                <span className="flex-1 mt-0 mb-0 mr-2.5 ml-2.5">
-                                    Categories
-                                </span>
-                                <MdOutlineKeyboardArrowRight className="submenu-icon" />
+                                {isOpen && (
+                                    <>
+                                        <span className="flex-1 mt-0 mb-0 mr-2.5 ml-2.5">
+                                            Categories
+                                        </span>
+                                        <MdOutlineKeyboardArrowRight />
+                                    </>
+                                )}
                             </Link>
-                            {/* <ul className="dropdown-menu">
+                            <ul className="group-hover:visible group-hover:translate-y-0 invisible absolute top-0 left-full transition-all ease-in-out duration-100 bg-white shadow translate-y-2 z-10">
                                 <li>
-                                    <Link href="#">
+                                    <Link
+                                        href="#"
+                                        className="text-xs py-6 px-8"
+                                    >
                                         <strong>Categories</strong>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="#">
-                                        <MdOutlineKeyboardArrowRight className="submenu-icon" />
+                                    <Link
+                                        href="#"
+                                        className="flex items-center text-xs py-2 px-2"
+                                    >
+                                        <MdOutlineKeyboardArrowRight />
                                         <span className="flex-1 mt-0 mb-0 mr-2.5 ml-2.5">
                                             List
                                         </span>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="#">
-                                        <MdOutlineKeyboardArrowRight className="submenu-icon" />
+                                    <Link
+                                        href="#"
+                                        className="flex items-center text-xs py-2 px-2"
+                                    >
+                                        <MdOutlineKeyboardArrowRight />
                                         <span className="flex-1 mt-0 mb-0 mr-2.5 ml-2.5">
                                             Add
                                         </span>
                                     </Link>
                                 </li>
-                            </ul> */}
+                            </ul>
                         </li>
-                        <li className="item">
+                        <li className="relative group">
                             <Link
                                 href="#"
                                 className="flex items-center justify-center p-2.5 transition-all ease-in-out duration-300 text-xs font-semibold hover:bg-cyan-50 hover:text-cyan-600"
                             >
                                 <FaRegComments size={18} />
-                                <span className="flex-1 mt-0 mb-0 mr-2.5 ml-2.5">
-                                    Comments
-                                </span>
+                                {isOpen && (
+                                    <span className="flex-1 mt-0 mb-0 mr-2.5 ml-2.5">
+                                        Comments
+                                    </span>
+                                )}
                             </Link>
-                            {/* <ul className="dropdown-menu">
+                            <ul className="group-hover:visible group-hover:translate-y-0 invisible absolute top-0 left-full transition-all ease-in-out duration-100 bg-white shadow translate-y-2 z-10">
                                 <li>
-                                    <Link href="#">
+                                    <Link
+                                        href="#"
+                                        className="text-xs py-6 px-8"
+                                    >
                                         <strong>Comments</strong>
                                     </Link>
                                 </li>
-                            </ul> */}
+                            </ul>
                         </li>
-                        <li className="item">
+                        <li className="relative group">
                             <Link
                                 href="#"
                                 className="flex items-center justify-center p-2.5 transition-all ease-in-out duration-300 text-xs font-semibold hover:bg-cyan-50 hover:text-cyan-600"
                             >
                                 <MdEditNote size={18} />
-                                <span className="flex-1 mt-0 mb-0 mr-2.5 ml-2.5">
-                                    Blogs
-                                </span>
+                                {isOpen && (
+                                    <span className="flex-1 mt-0 mb-0 mr-2.5 ml-2.5">
+                                        Blogs
+                                    </span>
+                                )}
                             </Link>
-                            {/* <ul className="dropdown-menu">
+                            <ul className="group-hover:visible group-hover:translate-y-0 invisible absolute top-0 left-full transition-all ease-in-out duration-100 bg-white shadow translate-y-2 z-10">
                                 <li>
-                                    <Link href="#">
+                                    <Link
+                                        href="#"
+                                        className="text-xs py-6 px-8"
+                                    >
                                         <strong>Blogs</strong>
                                     </Link>
                                 </li>
-                            </ul> */}
+                            </ul>
                         </li>
                     </ul>
                 </nav>
             </div>
-            <div className="flex flex-row justify-center items-center border-t border-gray-100 p-1">
+            <div
+                className={`flex justify-center items-center border-t border-gray-100 p-1 ${
+                    isOpen ? "flex-row" : "flex-col"
+                }`}
+            >
                 <Link href="#" className="p-2.5">
                     <BsGear size={18} />
                 </Link>
