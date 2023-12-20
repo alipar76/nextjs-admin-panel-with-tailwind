@@ -16,9 +16,9 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className="h-screen">
-                <div className="grid grid-cols-[230px_minmax(900px,_1fr)] h-screen">
+                <div className="flex h-screen">
                     <Sidebar />
-                    <div>
+                    <div className="flex-1">
                         <Header />
                         {children}
                         <Footer />
