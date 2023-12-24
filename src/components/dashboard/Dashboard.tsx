@@ -5,12 +5,13 @@ import { LuDollarSign } from "react-icons/lu";
 import { FaUser } from "react-icons/fa6";
 import { BsBasket3 } from "react-icons/bs";
 import { SlBasketLoaded } from "react-icons/sl";
+
 import ViewsStatistics from "./components/ViewsStatistics";
 import SalesStatistics from "./components/SalesStatistics";
 
 const Dashboard = () => {
     return (
-        <div className="h-auto bg-slate-50 p-4">
+        <div className="h-full bg-slate-50 p-4">
             <h6>Dashboard</h6>
             <div className="flex md:space-x-4 sm:space-x-1 mt-4">
                 <div className="flex items-center md:w-1/4 sm:1/2 p-3 bg-white rounded-lg h-24 transition-all duration-300 hover:shadow hover:-translate-y-1">

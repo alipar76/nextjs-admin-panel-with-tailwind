@@ -21,7 +21,7 @@ const Sidebar = () => {
     };
     return (
         <div
-            className={`flex flex-col justify-between bg-white border-r border-gray-100 duration-300 text-gray-500 h-100 ${
+            className={`flex flex-col justify-between bg-white border-r border-gray-100 duration-300 text-gray-500 h-full ${
                 isOpen ? "w-56" : "w-14"
             }`}
         >
@@ -49,7 +49,7 @@ const Sidebar = () => {
                             >
                                 <AiOutlineHome size={18} />
                                 {isOpen && (
-                                    <span className="flex-1 mt-0 mb-0 mr-2.5 ml-2.5">
+                                    <span className="flex-1 py-0 px-2.5">
                                         Dashboard
                                     </span>
                                 )}
@@ -73,7 +73,7 @@ const Sidebar = () => {
                                 <BsFillBasket2Fill size={18} />
                                 {isOpen && (
                                     <>
-                                        <span className="flex-1 mt-0 mb-0 mr-2.5 ml-2.5">
+                                        <span className="flex-1 py-0 px-2.5">
                                             Products
                                         </span>
                                         <MdOutlineKeyboardArrowRight />
@@ -95,7 +95,7 @@ const Sidebar = () => {
                                         className="flex items-center text-xs py-2 px-2"
                                     >
                                         <MdOutlineKeyboardArrowRight />
-                                        <span className="flex-1 mt-0 mb-0 mr-2.5 ml-2.5">
+                                        <span className="flex-1 py-0 px-2.5">
                                             List
                                         </span>
                                     </Link>
@@ -106,7 +106,7 @@ const Sidebar = () => {
                                         className="flex items-center text-xs py-2 px-2"
                                     >
                                         <MdOutlineKeyboardArrowRight />
-                                        <span className="flex-1 mt-0 mb-0 mr-2.5 ml-2.5">
+                                        <span className="flex-1 py-0 px-2.5">
                                             Add
                                         </span>
                                     </Link>
@@ -121,7 +121,7 @@ const Sidebar = () => {
                                 <BiCategoryAlt size={18} />
                                 {isOpen && (
                                     <>
-                                        <span className="flex-1 mt-0 mb-0 mr-2.5 ml-2.5">
+                                        <span className="flex-1 py-0 px-2.5">
                                             Categories
                                         </span>
                                         <MdOutlineKeyboardArrowRight />
@@ -143,7 +143,7 @@ const Sidebar = () => {
                                         className="flex items-center text-xs py-2 px-2"
                                     >
                                         <MdOutlineKeyboardArrowRight />
-                                        <span className="flex-1 mt-0 mb-0 mr-2.5 ml-2.5">
+                                        <span className="flex-1 py-0 px-2.5">
                                             List
                                         </span>
                                     </Link>
@@ -154,7 +154,7 @@ const Sidebar = () => {
                                         className="flex items-center text-xs py-2 px-2"
                                     >
                                         <MdOutlineKeyboardArrowRight />
-                                        <span className="flex-1 mt-0 mb-0 mr-2.5 ml-2.5">
+                                        <span className="flex-1 py-0 px-2.5">
                                             Add
                                         </span>
                                     </Link>
@@ -168,7 +168,7 @@ const Sidebar = () => {
                             >
                                 <FaRegComments size={18} />
                                 {isOpen && (
-                                    <span className="flex-1 mt-0 mb-0 mr-2.5 ml-2.5">
+                                    <span className="flex-1 py-0 px-2.5">
                                         Comments
                                     </span>
                                 )}
@@ -191,7 +191,7 @@ const Sidebar = () => {
                             >
                                 <MdEditNote size={18} />
                                 {isOpen && (
-                                    <span className="flex-1 mt-0 mb-0 mr-2.5 ml-2.5">
+                                    <span className="flex-1 py-0 px-2.5">
                                         Blogs
                                     </span>
                                 )}
