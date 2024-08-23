@@ -12,6 +12,10 @@ import { FiMenu } from "react-icons/fi";
 
 const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(true);
+    const [isDropdownOpen, setIsDropdownOpen] = useState<{
+        [key: number]: boolean;
+    }>({});
+
     const toggleSidebar = () => {
         if (isOpen) {
             setIsOpen(false);
@@ -19,6 +23,14 @@ const Sidebar = () => {
             setIsOpen(true);
         }
     };
+
+    const toggleDropdown = (index: number) => {
+        setIsDropdownOpen((prevState) => ({
+            ...prevState,
+            [index]: !prevState[index],
+        }));
+    };
+
     return (
         <div
             className={`flex flex-col justify-between bg-white border-r border-gray-100 duration-300 text-gray-500 h-full ${
@@ -42,33 +54,25 @@ const Sidebar = () => {
                 </div>
                 <nav>
                     <ul>
-                        <li className="relative group">
+                        <li className="relative">
                             <Link
                                 href="#"
-                                className="flex items-center justify-center p-2.5 transition-all ease-in-out duration-300 text-xs font-semibold hover:bg-cyan-50 hover:text-cyan-600"
+                                className="flex items-center justify-center w-full p-2.5 transition-all ease-in-out duration-300 text-xs font-semibold hover:bg-cyan-50 hover:text-cyan-600"
                             >
                                 <AiOutlineHome size={18} />
                                 {isOpen && (
-                                    <span className="flex-1 py-0 px-2.5">
-                                        Dashboard
-                                    </span>
+                                    <>
+                                        <span className="flex-1 py-0 px-2.5">
+                                            Dashboard
+                                        </span>
+                                    </>
                                 )}
                             </Link>
-                            <ul className="group-hover:visible group-hover:translate-y-0 invisible absolute top-0 left-full transition-all ease-in-out duration-100 bg-white shadow translate-y-2 z-10">
-                                <li>
-                                    <Link
-                                        href="#"
-                                        className="py-6 px-8 transition-all ease-in-out duration-100 text-xs"
-                                    >
-                                        <strong>Dashboard</strong>
-                                    </Link>
-                                </li>
-                            </ul>
                         </li>
-                        <li className="relative group">
-                            <Link
-                                href="#"
-                                className="flex items-center justify-center p-2.5 transition-all ease-in-out duration-300 text-xs font-semibold hover:bg-cyan-50 hover:text-cyan-600"
+                        <li className="relative">
+                            <button
+                                onClick={() => toggleDropdown(1)}
+                                className="flex items-center justify-center w-full p-2.5 transition-all ease-in-out duration-300 text-xs font-semibold hover:bg-cyan-50 hover:text-cyan-600"
                             >
                                 <BsFillBasket2Fill size={18} />
                                 {isOpen && (
@@ -76,47 +80,52 @@ const Sidebar = () => {
                                         <span className="flex-1 py-0 px-2.5">
                                             Products
                                         </span>
-                                        <MdOutlineKeyboardArrowRight />
+                                        <MdOutlineKeyboardArrowRight
+                                            size={16}
+                                            className={`transform transition-transform duration-300 ${
+                                                isDropdownOpen
+                                                    ? "rotate-90"
+                                                    : ""
+                                            }`}
+                                        />
                                     </>
                                 )}
-                            </Link>
-                            <ul className="group-hover:visible group-hover:translate-y-0 invisible absolute top-0 left-full transition-all ease-in-out duration-100 bg-white shadow translate-y-2 z-10">
-                                <li>
-                                    <Link
-                                        href="#"
-                                        className="text-xs py-6 px-8"
-                                    >
-                                        <strong>Products</strong>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        href="#"
-                                        className="flex items-center text-xs py-2 px-2"
-                                    >
-                                        <MdOutlineKeyboardArrowRight />
-                                        <span className="flex-1 py-0 px-2.5">
-                                            List
-                                        </span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        href="#"
-                                        className="flex items-center text-xs py-2 px-2"
-                                    >
-                                        <MdOutlineKeyboardArrowRight />
-                                        <span className="flex-1 py-0 px-2.5">
-                                            Add
-                                        </span>
-                                    </Link>
-                                </li>
-                            </ul>
+                            </button>
+                            {isDropdownOpen[1] && (
+                                <ul
+                                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                                        isDropdownOpen[1]
+                                            ? "max-h-40"
+                                            : "max-h-0"
+                                    }`}
+                                >
+                                    <li>
+                                        <Link
+                                            href="#"
+                                            className="flex items-center p-2.5 transition-all ease-in-out duration-300 text-xs font-semibold hover:bg-cyan-50 hover:text-cyan-600"
+                                        >
+                                            <span className="ml-6">
+                                                Submenu Item 1
+                                            </span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            href="#"
+                                            className="flex items-center p-2.5 transition-all ease-in-out duration-300 text-xs font-semibold hover:bg-cyan-50 hover:text-cyan-600"
+                                        >
+                                            <span className="ml-6">
+                                                Submenu Item 2
+                                            </span>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            )}
                         </li>
-                        <li className="relative group">
-                            <Link
-                                href="#"
-                                className="flex items-center justify-center p-2.5 transition-all ease-in-out duration-300 text-xs font-semibold hover:bg-cyan-50 hover:text-cyan-600"
+                        <li className="relative">
+                            <button
+                                onClick={() => toggleDropdown(2)}
+                                className="flex items-center justify-center w-full p-2.5 transition-all ease-in-out duration-300 text-xs font-semibold hover:bg-cyan-50 hover:text-cyan-600"
                             >
                                 <BiCategoryAlt size={18} />
                                 {isOpen && (
@@ -124,88 +133,153 @@ const Sidebar = () => {
                                         <span className="flex-1 py-0 px-2.5">
                                             Categories
                                         </span>
-                                        <MdOutlineKeyboardArrowRight />
+                                        <MdOutlineKeyboardArrowRight
+                                            size={16}
+                                            className={`transform transition-transform duration-300 ${
+                                                isDropdownOpen
+                                                    ? "rotate-90"
+                                                    : ""
+                                            }`}
+                                        />
                                     </>
                                 )}
-                            </Link>
-                            <ul className="group-hover:visible group-hover:translate-y-0 invisible absolute top-0 left-full transition-all ease-in-out duration-100 bg-white shadow translate-y-2 z-10">
-                                <li>
-                                    <Link
-                                        href="#"
-                                        className="text-xs py-6 px-8"
-                                    >
-                                        <strong>Categories</strong>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        href="#"
-                                        className="flex items-center text-xs py-2 px-2"
-                                    >
-                                        <MdOutlineKeyboardArrowRight />
-                                        <span className="flex-1 py-0 px-2.5">
-                                            List
-                                        </span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        href="#"
-                                        className="flex items-center text-xs py-2 px-2"
-                                    >
-                                        <MdOutlineKeyboardArrowRight />
-                                        <span className="flex-1 py-0 px-2.5">
-                                            Add
-                                        </span>
-                                    </Link>
-                                </li>
-                            </ul>
+                            </button>
+                            {isDropdownOpen[2] && (
+                                <ul
+                                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                                        isDropdownOpen[2]
+                                            ? "max-h-40"
+                                            : "max-h-0"
+                                    }`}
+                                >
+                                    <li>
+                                        <Link
+                                            href="#"
+                                            className="flex items-center p-2.5 transition-all ease-in-out duration-300 text-xs font-semibold hover:bg-cyan-50 hover:text-cyan-600"
+                                        >
+                                            <span className="ml-6">
+                                                Submenu Item 1
+                                            </span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            href="#"
+                                            className="flex items-center p-2.5 transition-all ease-in-out duration-300 text-xs font-semibold hover:bg-cyan-50 hover:text-cyan-600"
+                                        >
+                                            <span className="ml-6">
+                                                Submenu Item 2
+                                            </span>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            )}
                         </li>
-                        <li className="relative group">
-                            <Link
-                                href="#"
-                                className="flex items-center justify-center p-2.5 transition-all ease-in-out duration-300 text-xs font-semibold hover:bg-cyan-50 hover:text-cyan-600"
+                        <li className="relative">
+                            <button
+                                onClick={() => toggleDropdown(3)}
+                                className="flex items-center justify-center w-full p-2.5 transition-all ease-in-out duration-300 text-xs font-semibold hover:bg-cyan-50 hover:text-cyan-600"
                             >
                                 <FaRegComments size={18} />
                                 {isOpen && (
-                                    <span className="flex-1 py-0 px-2.5">
-                                        Comments
-                                    </span>
+                                    <>
+                                        <span className="flex-1 py-0 px-2.5">
+                                            Comments
+                                        </span>
+                                        <MdOutlineKeyboardArrowRight
+                                            size={16}
+                                            className={`transform transition-transform duration-300 ${
+                                                isDropdownOpen
+                                                    ? "rotate-90"
+                                                    : ""
+                                            }`}
+                                        />
+                                    </>
                                 )}
-                            </Link>
-                            <ul className="group-hover:visible group-hover:translate-y-0 invisible absolute top-0 left-full transition-all ease-in-out duration-100 bg-white shadow translate-y-2 z-10">
-                                <li>
-                                    <Link
-                                        href="#"
-                                        className="text-xs py-6 px-8"
-                                    >
-                                        <strong>Comments</strong>
-                                    </Link>
-                                </li>
-                            </ul>
+                            </button>
+                            {isDropdownOpen[3] && (
+                                <ul
+                                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                                        isDropdownOpen[3]
+                                            ? "max-h-40"
+                                            : "max-h-0"
+                                    }`}
+                                >
+                                    <li>
+                                        <Link
+                                            href="#"
+                                            className="flex items-center p-2.5 transition-all ease-in-out duration-300 text-xs font-semibold hover:bg-cyan-50 hover:text-cyan-600"
+                                        >
+                                            <span className="ml-6">
+                                                Submenu Item 1
+                                            </span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            href="#"
+                                            className="flex items-center p-2.5 transition-all ease-in-out duration-300 text-xs font-semibold hover:bg-cyan-50 hover:text-cyan-600"
+                                        >
+                                            <span className="ml-6">
+                                                Submenu Item 2
+                                            </span>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            )}
                         </li>
-                        <li className="relative group">
-                            <Link
-                                href="#"
-                                className="flex items-center justify-center p-2.5 transition-all ease-in-out duration-300 text-xs font-semibold hover:bg-cyan-50 hover:text-cyan-600"
+                        <li className="relative">
+                            <button
+                                onClick={() => toggleDropdown(4)}
+                                className="flex items-center justify-center w-full p-2.5 transition-all ease-in-out duration-300 text-xs font-semibold hover:bg-cyan-50 hover:text-cyan-600"
                             >
                                 <MdEditNote size={18} />
                                 {isOpen && (
-                                    <span className="flex-1 py-0 px-2.5">
-                                        Blogs
-                                    </span>
+                                    <>
+                                        <span className="flex-1 py-0 px-2.5">
+                                            Blogs
+                                        </span>
+                                        <MdOutlineKeyboardArrowRight
+                                            size={16}
+                                            className={`transform transition-transform duration-300 ${
+                                                isDropdownOpen
+                                                    ? "rotate-90"
+                                                    : ""
+                                            }`}
+                                        />
+                                    </>
                                 )}
-                            </Link>
-                            <ul className="group-hover:visible group-hover:translate-y-0 invisible absolute top-0 left-full transition-all ease-in-out duration-100 bg-white shadow translate-y-2 z-10">
-                                <li>
-                                    <Link
-                                        href="#"
-                                        className="text-xs py-6 px-8"
-                                    >
-                                        <strong>Blogs</strong>
-                                    </Link>
-                                </li>
-                            </ul>
+                            </button>
+                            {isDropdownOpen[4] && (
+                                <ul
+                                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                                        isDropdownOpen[4]
+                                            ? "max-h-40"
+                                            : "max-h-0"
+                                    }`}
+                                >
+                                    <li>
+                                        <Link
+                                            href="#"
+                                            className="flex items-center p-2.5 transition-all ease-in-out duration-300 text-xs font-semibold hover:bg-cyan-50 hover:text-cyan-600"
+                                        >
+                                            <span className="ml-6">
+                                                Submenu Item 1
+                                            </span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            href="#"
+                                            className="flex items-center p-2.5 transition-all ease-in-out duration-300 text-xs font-semibold hover:bg-cyan-50 hover:text-cyan-600"
+                                        >
+                                            <span className="ml-6">
+                                                Submenu Item 2
+                                            </span>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            )}
                         </li>
                     </ul>
                 </nav>
